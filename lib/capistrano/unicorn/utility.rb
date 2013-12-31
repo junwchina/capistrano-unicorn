@@ -42,7 +42,9 @@ module CapistranoUnicorn
           exit 0
         EOF
         tmp.close
-        extracted_pid = `unicorn -c "#{tmp.path}"`
+
+        # Ignore the error when run this command on local machine
+        extracted_pid = `unicorn -c "#{tmp.path}" 2>&1`
         $?.success? ? extracted_pid.rstrip : nil
       rescue StandardError => e
         return nil
@@ -61,13 +63,13 @@ module CapistranoUnicorn
     # Stale Unicorn process pid file
     #
     def old_unicorn_pid
-      "#{unicorn_pid}.oldbin"
+      "#{fetch :unicorn_pid}.oldbin"
     end
 
     # Command to check if Unicorn is running
     #
     def unicorn_is_running?
-      remote_process_exists?(unicorn_pid)
+      remote_process_exists?(fetch :unicorn_pid)
     end
 
     # Command to check if stale Unicorn is running
@@ -78,7 +80,7 @@ module CapistranoUnicorn
 
     # Get unicorn master process PID (using the shell)
     #
-    def get_unicorn_pid(pid_file=unicorn_pid)
+    def get_unicorn_pid(pid_file=fetch(:unicorn_pid))
       "`cat #{pid_file}`"
     end
 
@@ -130,13 +132,13 @@ module CapistranoUnicorn
           fi;
         fi;
 
-        if [ -e "#{unicorn_pid}" ]; then
-          if #{try_unicorn_user} kill -0 `cat #{unicorn_pid}` > /dev/null 2>&1; then
+        if [ -e "#{fetch :unicorn_pid}" ]; then
+          if #{try_unicorn_user} kill -0 `cat #{fetch :unicorn_pid}` > /dev/null 2>&1; then
             echo "Unicorn is already running!";
             exit 0;
           fi;
 
-          #{try_unicorn_user} rm #{unicorn_pid};
+          #{try_unicorn_user} rm #{fetch :unicorn_pid};
         fi;
 
         echo "Starting Unicorn...";
@@ -162,17 +164,5 @@ module CapistranoUnicorn
       #defer{ fetch(:unicorn_roles, :app) }
     end
 
-
-    def unicorn_pid
-      extracted_pid = extract_pid_file
-      if extracted_pid
-        extracted_pid
-      else
-        # TODO logger is not defined
-        #logger.important "err :: failed to auto-detect pid from #{local_unicorn_config}"
-        #logger.important "err :: falling back to default: #{unicorn_default_pid}"
-        fetch :unicorn_default_pid
-      end
-    end
   end
 end
