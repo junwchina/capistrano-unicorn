@@ -36,24 +36,13 @@ namespace :load do
     set :unicorn_config_file_path      , Proc.new{ File.join(fetch(:app_path), fetch(:unicorn_config_rel_file_path)) }
     set :unicorn_config_stage_file_path, Proc.new{ File.join(fetch(:app_path), fetch(:unicorn_config_stage_rel_file_path)) }
     set :unicorn_default_pid           , Proc.new{ File.join(fetch(:app_path), 'tmp', 'pids', 'unicorn.pid') }
-    set :unicorn_pid, Proc.new{
-      extracted_pid = extract_pid_file
-      if extracted_pid
-        extracted_pid
-      else
-        # TODO logger is not defined
-        #logger.important "err :: failed to auto-detect pid from #{local_unicorn_config}"
-        #logger.important "err :: falling back to default: #{unicorn_default_pid}"
-        fetch :unicorn_default_pid
-      end
-    }
   end
 end
 
 namespace :unicorn do
   desc 'Debug Unicorn variables'
   task :show_vars do
-    on roles :app do
+    on roles unicorn_roles do
       puts <<-EOF.gsub(/^ +/, '')
         # Environments
         rails_env          #{fetch :rails_env}
@@ -76,8 +65,8 @@ namespace :unicorn do
 
         # Absolute paths
         app_path                  #{fetch :app_path}
-        unicorn_pid               #{fetch :unicorn_pid}
-        #bundle_gemfile            #{fetch :bundle_gemfile}
+        unicorn_pid               #{unicorn_pid}
+        #bundle_gemfile           #{fetch :bundle_gemfile}
         unicorn_config_path       #{fetch :unicorn_config_path}
         unicorn_config_file_path  #{fetch :unicorn_config_file_path}
         unicorn_config_stage_file_path

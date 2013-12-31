@@ -1,0 +1,24 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.8	//
+CapistranoUnicorn	lib/capistrano/unicorn/utility.rb	/^module CapistranoUnicorn$/;"	m
+CapistranoUnicorn	lib/capistrano/unicorn/version.rb	/^module CapistranoUnicorn$/;"	m
+Utility	lib/capistrano/unicorn/utility.rb	/^  module Utility$/;"	m	class:CapistranoUnicorn
+duplicate_unicorn	lib/capistrano/unicorn/utility.rb	/^    def duplicate_unicorn$/;"	f	class:CapistranoUnicorn.Utility.kill_unicorn.start_unicorn
+extract_pid_file	lib/capistrano/unicorn/utility.rb	/^    def extract_pid_file$/;"	f	class:CapistranoUnicorn.Utility
+get_old_unicorn_pid	lib/capistrano/unicorn/utility.rb	/^    def get_old_unicorn_pid$/;"	f	class:CapistranoUnicorn.Utility
+get_unicorn_pid	lib/capistrano/unicorn/utility.rb	/^    def get_unicorn_pid(pid_file=fetch(:unicorn_pid))$/;"	f	class:CapistranoUnicorn.Utility
+kill_unicorn	lib/capistrano/unicorn/utility.rb	/^    def kill_unicorn(signal)$/;"	f	class:CapistranoUnicorn.Utility
+local_unicorn_config	lib/capistrano/unicorn/utility.rb	/^    def local_unicorn_config$/;"	f	class:CapistranoUnicorn.Utility
+old_unicorn_is_running?	lib/capistrano/unicorn/utility.rb	/^    def old_unicorn_is_running?$/;"	f	class:CapistranoUnicorn.Utility
+old_unicorn_pid	lib/capistrano/unicorn/utility.rb	/^    def old_unicorn_pid$/;"	f	class:CapistranoUnicorn.Utility
+remote_process_exists?	lib/capistrano/unicorn/utility.rb	/^    def remote_process_exists?(pid_file)$/;"	f	class:CapistranoUnicorn.Utility
+start_unicorn	lib/capistrano/unicorn/utility.rb	/^    def start_unicorn$/;"	f	class:CapistranoUnicorn.Utility.kill_unicorn
+try_unicorn_user	lib/capistrano/unicorn/utility.rb	/^    def try_unicorn_user$/;"	f	class:CapistranoUnicorn.Utility
+unicorn_is_running?	lib/capistrano/unicorn/utility.rb	/^    def unicorn_is_running?$/;"	f	class:CapistranoUnicorn.Utility
+unicorn_roles	lib/capistrano/unicorn/utility.rb	/^    def unicorn_roles$/;"	f	class:CapistranoUnicorn.Utility.kill_unicorn.start_unicorn.duplicate_unicorn
+unicorn_send_signal	lib/capistrano/unicorn/utility.rb	/^    def unicorn_send_signal(signal, pid=get_unicorn_pid)$/;"	f	class:CapistranoUnicorn.Utility
+working_directory	lib/capistrano/unicorn/utility.rb	/^          def working_directory(path); end$/;"	f	class:CapistranoUnicorn.Utility.extract_pid_file
